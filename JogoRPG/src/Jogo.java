@@ -1,131 +1,136 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 // Classe que representa o jogo
-class Jogo {
-    private Jogador jogador; // Referência para o jogador
-    private Inimigo inimigo; // Referência para o inimigo
+public class Jogo {
+    private Jogador jogador;
+    private Inimigo inimigo;
 
-    // Construtor que inicializa o inimigo
     public Jogo() {
-        this.inimigo = new Inimigo("Volvagia", 100); // Cria um novo inimigo com 100 pontos de vida
+        this.jogador = new Jogador();
+        this.inimigo = new Inimigo();
     }
 
-    // Método que inicia o jogo
     public void iniciarJogo() {
-        exibirMenuInicial(); // Exibe o menu inicial
-        selecionarHeroi(); // Permite ao jogador selecionar seu herói
-        batalha(); // Inicia a batalha
-    }
-
-    // Método privado para exibir o menu inicial
-    private void exibirMenuInicial() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("------------------------------------");
         System.out.println("====================================");
-        System.out.println("| Bem-vindo ao Jogo de RPG Fantasia|");
+        System.out.println("  Bem-vindo ao Jogo de RPG Fantasia " );
+        System.out.println("------------------------------------");
+        System.out.println("Você chega a caverna do Volvagia, e terá que derrota-lo para salvar seu reino!\nPrepare-se para uma batalha épica!");
+        System.out.println("                                                  |*~=-.,   ");
+        System.out.println("                                                  |_,-'`    ");
+        System.out.println("                                                  |         ");
+        System.out.println("                                                 /^\\        ");
+        System.out.println("                   !_                           /   \\       ");
+        System.out.println("                   |*`~-.,                     /,    \\      ");
+        System.out.println("                   |.-~^`                     /#    \\     ");
+        System.out.println("                   |                        _/##_   _  \\_   ");
+        System.out.println("             [ ]_[ ]_[ ]_[ ]_[ ]            |_=_-=_ - =_|   ");
+        System.out.println("           |.-'|=     []     |   !_       |_.-   |    ");
+        System.out.println("           |   |_=- -        |   |*`~-.,  |  |=_-      |    ");
+        System.out.println("          /^  |=_= -        |   |_,-~`  /^\\ |_ - =[]  |    ");
+        System.out.println("      _  /   \\_|_=- _   _   _|  _|  _   /   \\|=_-      |    ");
+        System.out.println("     [ ]/,    \\[ ]_[ ]_[ ]_[ ]_[ ]_[ ]_/,    \\[ ]=-    |    ");
+        System.out.println("      |/#     \\_=-___=__=__- =-_ -=_ /#     \\| _ []  |    ");
+        System.out.println("     _/##_   _  \\_-_ =  _____       _/##_   _  _ -    |\\   ");
+        System.out.println("    [ ]_[ ]_[ ]_[ ]=_0~{_ _ _}~0   [ ]_[ ]_[ ]_[ ]=-   | \\  ");
+        System.out.println("    |_=__-_=-_  =_|-=_ |  ,  |     |_=-___-_ =-__|_    |  \\ ");
+        System.out.println("     | _- =-     |-_   | ((* |      |= _=       | -    |___\\");
+
+
+        //Carregamento pra da emoção ao jogo kkkk
+        for (int i = 5; i > 0; i--) {
+            try {
+                Thread.sleep(1000); // Simula o carregamento
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println("====================================");
         System.out.println("|                                  |");
-        System.out.println("|        Escolha seu Herói:        |");
+        System.out.println("|     Escolha seu Herói:           |");
         System.out.println("|                                  |");
         System.out.println("|  1. Gandolf - O Mago             |");
         System.out.println("|  2. Aragon - O Guerreiro         |");
         System.out.println("|  3. Sair do Jogo                 |");
         System.out.println("|                                  |");
         System.out.println("====================================");
-    }
 
-    // Método privado para permitir ao jogador selecionar seu herói
-    private void selecionarHeroi() {
-        Scanner scanner = new Scanner(System.in);
         int escolha;
+            do {
+                try {
+                    System.out.print("Escolha seu Herói: ");
+                    escolha = scanner.nextInt();
 
-        do {
-            System.out.print("Escolha seu Herói: ");
-            escolha = scanner.nextInt();
-
-            switch (escolha) {
-                case 1:
-                    jogador = new Mago("Gandolf", 80, 150); // Cria um novo mago com 80 pontos de vida e 150 de mana
-                    break;
-                case 2:
-                    jogador = new Guerreiro("Aragon", 100, 150); // Cria um novo guerreiro com 100 pontos de vida e 150 de energia
-                    break;
-                case 3:
-                    System.out.println("Você saiu do jogo. Até logo!");
-                    return;
-                default:
-                    System.out.println("Opção inválida. Por favor, escolha novamente.");
-            }
-        } while (escolha < 1 || escolha > 3);
-
-        System.out.println("====================================");
-        System.out.println("|     Você escolheu: " + jogador.getNome() + "     |");
-        System.out.println("| Iniciando a batalha contra " + inimigo.getNome() + "!  |");
-        System.out.println("====================================");
-    }
-
-    // Método privado para realizar a batalha
-    private void batalha() {
-        Random random = new Random();
-        Scanner scanner = new Scanner(System.in);
+                    switch (escolha) {
+                        case 1:
+                            //ESSE AQUI É PRA CHAMAR O QUE CADA UM TEM NA CLASSE AO SER ESCOLHIDO
+                            jogador = new Mago();
+                            System.out.println("Você escolheu o Mago Gandolf para lutar contra o terrível Dragão Volvagia!");
+                            break;
+                        case 2:
+                            jogador = new Guerreiro();
+                            System.out.println("Você escolheu o Guerreiro Aragon para lutar contra o terrível Dragão Volvagia!");
+                            break;
+                        case 3:
+                            System.out.println("Você saiu do jogo. Até logo!");
+                            return;
+                        default:
+                            System.out.println("Opção inválida. Por favor, escolha novamente.");
+                    }
+                } catch (InputMismatchException e){
+                    System.out.println("Opção inválida. Por favor, digite um número válido.");
+                    scanner.next(); //limpar o buffer
+                    escolha = 0;
+                }
+            } while (escolha < 1 || escolha > 3);
 
         while (jogador.estaVivo() && inimigo.estaVivo()) {
-            exibirStatus(); // Exibe o status do jogador e do inimigo
-            exibirMenuAcoes(); // Exibe o menu de ações disponíveis
+            System.out.println("Escolha sua ação:");
+            System.out.println("1. Atacar");
+            System.out.println("2. Defender");
+            
 
-            int acao = scanner.nextInt(); // Lê a ação escolhida pelo jogador
+             //tratar exception ataque
+             try {
+                escolha = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                System.out.println("Escolha inválida. Tente novamente.");
+                scanner.next(); 
+                continue; 
+                }
 
-            switch (acao) {
-                case 1:
-                    jogador.atacar(inimigo, random); // Jogador ataca o inimigo
-                    break;
-                case 2:
-                    jogador.defender(); // Jogador defende
-                    break;
-                case 3:
-                    jogador.recuperarMana(); // Jogador recupera mana
-                    break;
-                default:
-                    System.out.println("Ação inválida. Tente novamente.");
+            if (escolha == 1) {
+                jogador.atacar(inimigo);
+            } else if (escolha == 2) {
+                jogador.defender(inimigo);
+            } else {
+                System.out.println("Escolha inválida. Tente novamente.");
+                continue;
             }
 
             if (inimigo.estaVivo()) {
-                inimigo.atacar(jogador, random); // Inimigo ataca o jogador
+                inimigo.atacar(jogador);
             }
         }
 
-        exibirResultado(); // Exibe o resultado da batalha
-    }
-
-    // Método privado para exibir o status do jogador e do inimigo
-    private void exibirStatus() {
-        System.out.println("====================================");
-        System.out.println("|   Vida do Jogador: " + jogador.getVida() + "             |");
-        System.out.println("|   Mana do Jogador: " + jogador.getMana() + "             |");
-        System.out.println("|   Vida do Inimigo: " + inimigo.getVida() + "             |");
-        System.out.println("====================================");
-    }
-
-    // Método privado para exibir o menu de ações disponíveis
-    private void exibirMenuAcoes() {
-        System.out.println("====================================");
-        System.out.println("|          Ações disponíveis        |");
-        System.out.println("====================================");
-        System.out.println("|  1. Atacar                       |");
-        System.out.println("|  2. Defesa                       |");
-        System.out.println("|  3. Recuperar Mana               |");
-        System.out.println("====================================");
-        System.out.print("Escolha sua ação: ");
-    }
-
-    // Método privado para exibir o resultado da batalha
-    private void exibirResultado() {
-        System.out.println("====================================");
         if (jogador.estaVivo()) {
-            System.out.println("|   Você venceu o dragão " + inimigo.getNome() + "!   |");
+            System.out.println("------------------Você derrotou o temível dragão!---------------------");
+            System.out.println("#######  #######  #######  #######  ######   #######  #     #  #######");
+            System.out.println("#     #  #     #  #     #  #     #  #    #   #        ##    #  #");
+            System.out.println("#######  #######  #######  #######  #######  ####     # ### #  #######");
+            System.out.println("#        #     #  #    #   #     #  #     #  #        #    ##        #");
+            System.out.println("#        #     #  #    ##  #     #  #######  #######  #     #  #######");
         } else {
-            System.out.println("|   Você foi derrotado pelo dragão " + inimigo.getNome() + "!   |");
+            System.out.println("------------------Você foi derrotado pelo dragão!-------------------");
+            System.out.println("  _____          __  __ ______    ______      ________ _____  ");
+            System.out.println(" / ____|   /\\   |  \\/  |  ____|  / __ \\ \\    / /  ____|  __ \\ ");
+            System.out.println("| |  __   /  \\  | \\  / | |__    | |  | \\ \\  / /| |__  | |__) |");
+            System.out.println("| | |_ | / /\\ \\ | |\\/| |  __|   | |  | | \\ \\/ / |  __| |  _  / ");
+            System.out.println("| |__| |/ ____ \\| |  | | |____  | |__| |  \\  /  | |____| | \\ \\ ");
+            System.out.println(" \\_____/_/    \\_\\_|  |_|______|  \\____/    \\/   |______|_|  \\_\\");
         }
-        System.out.println("====================================");
     }
 }
-
